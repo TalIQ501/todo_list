@@ -1,4 +1,4 @@
-const task = () => {
+export const task = () => {
     let title = '';
     let description = '';
     let dueDate = new Date();
