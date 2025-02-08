@@ -7,19 +7,19 @@ export const projectManager = () => {
     const createProject = () => {
         let project = '';
         
-        const tasks = [];
+        const todos = [];
 
         const getProjectName = () => project;
 
         const changeProjectName = (input) => project = input;
     
-        const getTasks = () => tasks;
+        const getTodos = () => todos;
     
-        const addTask = (task) => tasks.push(task);
+        const addTodo = (todo) => todos.push(todo);
     
-        const removeTask = (task) => tasks = tasks.filter(!task);
+        const removeTodo = (todo) => todos = todos.filter(!todo);
 
-        return { getProjectName, changeProjectName, getTasks, addTask, removeTask };
+        return { getProjectName, changeProjectName, getTodos, addTodo, removeTodo };
     }
 
     const getProject = (select) => projects.filter(project => project.getProjectName() === select)
