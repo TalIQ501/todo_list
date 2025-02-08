@@ -1,13 +1,14 @@
-const displayManager = () => {
+export const displayManager = () => {
+
     const displayTask = (targetDiv, task) => {
         const title = task.getTitle();
         const description = task.getDescription();
         const dueDate = task.getDueDate();
 
         const dueDateString = () => {
-            year = dueDate.getFullYear();
-            month = dueDate.getMonth() + 1;
-            day = dueDate.getDay();
+            const year = dueDate.getFullYear();
+            const month = dueDate.getMonth() + 1;
+            const day = dueDate.getDay();
             return `${year}/${month}/${day}`;
         }
 
@@ -28,8 +29,15 @@ const displayManager = () => {
 
         taskDiv.appendChild(titleDiv);
         taskDiv.appendChild(descriptionDiv);
+        taskDiv.appendChild(dueDateDiv);
 
         targetDiv.appendChild(taskDiv);
+    }
+
+    const displayProject = (targetDiv, project) => {
+        const projectName = project.getProjectName();
+
+        
     }
 
     return { displayTask }
