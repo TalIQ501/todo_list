@@ -10,4 +10,6 @@ const task = () => {
     const changeTitle = (input) => title = input;
     const changeDescription = (input) => description = input;
     const changeDueDate = (input) => dueDate = new Date(input);
+
+    return { getTitle, changeTitle, getDescription, changeDescription, getDueDate, changeDueDate }
 }
