@@ -9,7 +9,7 @@ export const displayManager = () => {
         const dueDateString = () => {
             const year = dueDate.getFullYear();
             const month = dueDate.getMonth() + 1;
-            const day = dueDate.getDay();
+            const day = dueDate.getDate();
             return `${year}/${month}/${day}`;
         }
 
