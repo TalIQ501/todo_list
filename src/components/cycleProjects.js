@@ -1,4 +1,4 @@
-export const projectsDisplay = (projectManager, displayManager) => {
+export const cycleProjects = (projectManager, displayManager) => {
     const projectsDiv = document.getElementById('project-list');
 
     projectManager.getProjects().forEach(project => {

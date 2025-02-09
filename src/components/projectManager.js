@@ -2,6 +2,8 @@ export const projectManager = () => {
 
     const projects = [];
 
+    let currentProject = null;
+
     const getProjects = () => projects;
 
     const createProject = () => {
@@ -22,9 +24,16 @@ export const projectManager = () => {
         return { getProjectName, changeProjectName, getTodos, addTodo, removeTodo };
     }
 
-    const getProject = (select) => projects.filter(project => project.getProjectName() === select)
+    const getProject = (select) => projects.find(project => project.getProjectName() === select)
+
+    const getCurrentProject = () => currentProject;
+
+    const changeCurrentProject = (changedProjectName) => {
+        const project = getProject(changedProjectName);
+        currentProject = project;
+    }
 
     const addProject = (project) => projects.push(project);
 
-    return { getProjects, getProject, createProject, addProject };
+    return { getProjects, getProject, createProject, getCurrentProject, changeCurrentProject, addProject };
 }
