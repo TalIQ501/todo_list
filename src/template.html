@@ -7,15 +7,23 @@
 </head>
 <body>
     <header>
-        <h1>To-Do</h1>
+        <h1>To-Do App</h1>
     </header>
+    <dialog id="dialog-project" class="dialog-form">
+        <form id="form-project" class="form-enter-data">
+            <label for="input-add-project">Enter Project Name</label>
+            <input type="text">
+            <button id="project-submit" class="btn-primary">Submit</button>
+        </form>
+        <buttoni id="dialog-project-close" class="btn-secondary">Close</button>
+    </dialog>
     <section id="content">
         <div id="sidebar" class="sidebar">
-            <button id="btn-new-project" class="btn-add btn-normal"> + New Project</button>
+            <button id="btn-add-project" class="btn-primary">+ New Project</button>
             <div id="project-list" class="sidebar-section">
                 <p class="sidebar-header">Projects</p>
             </div>
-            <button id="btn-add-todo" class="btn-add btn-normal"> + New Todo</button>
+            <button id="btn-add-todo" class="btn-primary">+ New Todo</button>
         </div>
         <div id="todos">
             

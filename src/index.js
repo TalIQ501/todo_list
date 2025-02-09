@@ -10,6 +10,13 @@ const pm = projectManager();
 const tm = todoManager();
 const dm = displayManager();
 
+const dialogProject = document.getElementById('dialog-project');
+const btnCloseProject = document.getElementById('dialog-project-close');
+btnCloseProject.addEventListener('click', () => dialogProject.close());
+
+const btnAddProject = document.getElementById('btn-add-project');
+btnAddProject.addEventListener('click', () => dialogProject.showModal())
+
 const defaulTodo = tm.createTodo();
 defaulTodo.changeTitle('Hello!');
 defaulTodo.changeDescription('Enter your todos here!');
