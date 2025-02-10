@@ -34,6 +34,7 @@ header {
     border-radius: 5px;
     font-family: 'Quicksand';
     font-weight: 700;
+    font-size: 1.1rem;
 }
 
 .btn-primary {
@@ -115,14 +116,14 @@ dialog::backdrop {
 }
 
 .project-sidebar {
+    padding: 5px;
     font-weight: 500;
-    font-size: 0.9rem;
     text-align: left;
 }
 
 .project-sidebar:hover {
     background-color: lightblue;
-    opacity: 0.5;
+    opacity: 0.8;
     transform: scale(1.1);
 }
 

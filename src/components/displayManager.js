@@ -37,9 +37,10 @@ export const displayManager = () => {
 
     const displayProjectSidebar = (targetDiv, project) => {
         const projectName = project.getProjectName();
+        const projectID = project.getID();
 
         const projectDiv = document.createElement('p');
-        projectDiv.setAttribute('id', projectName.toLowerCase())
+        projectDiv.setAttribute('id', `project-${projectID}`)
         projectDiv.classList.add('project-sidebar');
         projectDiv.textContent = projectName;
 
