@@ -1,4 +1,4 @@
-export const formHandlerAddProject = (formData, projectManager) => {
+export const formHandlerProject = (formData, projectManager) => {
     //Selects the only entry in formData using next
     const projName = formData.get('input-project-name');
 

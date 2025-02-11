@@ -2,10 +2,10 @@ import { displayManager } from './components/displayManager';
 import { projectManager } from './components/projectManager';
 import { cycleProjects } from './components/cycleProjects';
 import { cycleTodos } from './components/cycleTodos';
-import { formHandlerAddProject } from './components/formHandlerAddProject';
+import { formHandlerProject } from './components/formHandlerProject';
+import { formHandlerTodo } from './components/formHandlerTodo';
 
 import './styles.css';
-import { formHandlerTodo } from './components/formHandlerAddTodo';
 
 const pm = projectManager();
 const dm = displayManager();
@@ -26,12 +26,12 @@ const btnCloseTodo = document.getElementById('dialog-todo-close');
 btnCloseTodo.addEventListener('click', () => dialogTodo.close());
 
 const formProject = document.getElementById('form-project');
-formProject.addEventListener('submit', (e) => {
-    e.preventDefault();
+formProject.addEventListener('submit', e => {
+    e.preventDefault(); 
 
     const formData = new FormData(e.target);
 
-    const newProject = formHandlerAddProject(formData, pm);
+    const newProject = formHandlerProject(formData, pm);
 
     pm.addProject(newProject);
 
@@ -57,19 +57,24 @@ formTodo.addEventListener('submit', e => {
     cycleTodos(currentProj, dm);
 })
 
-const defaultProj = pm.createProject();
-defaultProj.changeProjectName('Todo App');
+const setDefaultValues = () => {
+    const defaultProj = pm.createProject();
+    defaultProj.changeProjectName('Todo App');
+    
+    const defaultTodo = defaultProj.todoManager.createTodo();
+    defaultTodo.changeTitle('Hello!');
+    defaultTodo.changeDescription('Enter your todos here!');
+    
+    defaultProj.todoManager.addTodo(defaultTodo);
+    
+    pm.addProject(defaultProj);
+    pm.changeCurrentProject(defaultProj.getID());
+}    
 
-const defaultTodo = defaultProj.todoManager.createTodo();
-defaultTodo.changeTitle('Hello!');
-defaultTodo.changeDescription('Enter your todos here!');
+const display = () => {
+    cycleProjects(pm, dm); 
+    cycleTodos(pm.getCurrentProject(), dm);
+}
 
-defaultProj.todoManager.addTodo(defaultTodo);
-
-pm.addProject(defaultProj);
-pm.changeCurrentProject(defaultProj.getID(), pm);
-
-cycleProjects(pm, dm);
-
-cycleTodos(pm.getCurrentProject(), dm);
-
+setDefaultValues()
+display()
