@@ -1,8 +1,8 @@
 export const formHandlerAddProject = (formData, projectManager) => {
     //Selects the only entry in formData using next
-    const projName = formData.entries().next().value[1];
+    const projName = formData.get('input-project-name');
 
-    const newProj = projectManager.createProject(projectManager);
+    const newProj = projectManager.createProject();
     newProj.changeProjectName(projName);
 
     return newProj;

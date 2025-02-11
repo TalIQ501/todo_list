@@ -6,12 +6,12 @@ export const projectManager = () => {
 
     let currentProject = null;
     const getProjects = () => projects;
-    const getCurrentID = () => projectID
+    const getCurrentID = () => projectID;
 
     const nextID = () => projectID = projectID + 1;
 
-    const createProject = (pm) => {
-        const id = pm.getCurrentID();
+    const createProject = () => {
+        const id = getCurrentID();
 
         let project = '';
 
@@ -70,7 +70,7 @@ export const projectManager = () => {
 
     const getProject = id => projects.find(project => project.getID() === id)
 
-    const getProjectFromName = (select) => projects.find(project => project.getProjectName() === select)
+    const getProjectFromName = (select) => projects.find(project => project.getProjectName() === select);
 
     const getCurrentProject = () => currentProject;
 
