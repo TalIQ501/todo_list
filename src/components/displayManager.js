@@ -1,3 +1,6 @@
+import imgCheckMarkComplete from '../img/check-mark-green-svgrepo-com.svg';
+import imgCheckMarkIncomplete from '../img/check-mark-red-svgrepo-com.svg';
+
 export const displayManager = () => {
 
     const displayTodo = (targetDiv, todo) => {
@@ -28,9 +31,32 @@ export const displayManager = () => {
         dueDateDiv.classList.add('due-date');
         dueDateDiv.textContent = dueDateString();
 
-        todoDiv.appendChild(titleDiv);
-        todoDiv.appendChild(descriptionDiv);
-        todoDiv.appendChild(dueDateDiv);
+        const completeDivContainer = document.createElement('div');
+        completeDivContainer.classList.add('img-container', 'check-mark-container');
+        
+        const checkMark = document.createElement('img');
+
+        (() => {completion ?
+            checkMark.src = imgCheckMarkComplete :
+            checkMark.src = imgCheckMarkIncomplete
+        })()
+
+        completeDivContainer.appendChild(checkMark);
+
+        const flexRow = document.createElement('div');
+        flexRow.classList.add('flex-row-container');
+
+        const detailsContainer = document.createElement('div');
+        detailsContainer.classList.add('details-container');
+
+        detailsContainer.appendChild(titleDiv);
+        detailsContainer.appendChild(descriptionDiv);
+        detailsContainer.appendChild(dueDateDiv);
+
+        flexRow.appendChild(completeDivContainer);
+        flexRow.appendChild(detailsContainer);
+
+        todoDiv.appendChild(flexRow);
 
         targetDiv.appendChild(todoDiv);
     }
@@ -40,7 +66,7 @@ export const displayManager = () => {
         const projectID = project.getID();
 
         const projectDiv = document.createElement('p');
-        projectDiv.setAttribute('id', `project-${projectID}`)
+        projectDiv.setAttribute('id', `project-${projectID}`);
         projectDiv.classList.add('project-sidebar');
         projectDiv.textContent = projectName;
 

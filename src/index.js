@@ -1,9 +1,8 @@
 import { displayManager } from './components/displayManager';
 import { projectManager } from './components/projectManager';
-import { cycleProjects } from './components/cycleProjects';
-import { cycleTodos } from './components/cycleTodos';
-import { formHandlerProject } from './components/formHandlerProject';
-import { formHandlerTodo } from './components/formHandlerTodo';
+import { cycleProjects } from './components/cycleLists';
+import { cycleTodos } from './components/cycleLists';
+import { formHandlerProject, formHandlerTodo } from './components/formHandlers';
 
 import './styles.css';
 
