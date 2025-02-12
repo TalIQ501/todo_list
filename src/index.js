@@ -53,7 +53,7 @@ formTodo.addEventListener('submit', e => {
 
     dialogTodo.close();
 
-    cycleTodos(currentProj, dm);
+    cycleTodos(pm, dm);
 })
 
 const setDefaultValues = () => {
@@ -72,7 +72,7 @@ const setDefaultValues = () => {
 
 const display = () => {
     cycleProjects(pm, dm); 
-    cycleTodos(pm.getCurrentProject(), dm);
+    cycleTodos(pm, dm);
 }
 
 setDefaultValues()

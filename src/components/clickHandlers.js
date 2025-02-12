@@ -1,4 +1,4 @@
-import { cycleTodos } from "./cycleLists";
+import { cycleTodos } from "./cycleLists.js";
 
 export const projectClickHandler = () => {
     
@@ -7,5 +7,9 @@ export const projectClickHandler = () => {
 export const checkMarkClickHandler = (todo, pm, dm) => {
     todo.toggleComplete();
 
-    cycleTodos(pm.getCurrentProject(), dm);
+    const project = pm.getCurrentProject();
+
+    project.todoManager.updateTodo(todo);
+
+    cycleTodos(pm, dm);
 }

@@ -8,13 +8,13 @@ export const cycleProjects = (projectManager, displayManager) => {
     })
 }
 
-export const cycleTodos = (project, displayManager) => {
+export const cycleTodos = (projectManager, displayManager) => {
     const todosDiv = document.getElementById('todos');
+    const project = projectManager.getCurrentProject();
 
-    todosDiv.innerHTML = ''
+    todosDiv.innerHTML = '';
 
     project.todoManager.getTodos().forEach(todo => {
-        displayManager.displayTodo(todosDiv, todo);
-        //todosDiv.addEventListener('click', () => )
+        displayManager.displayTodo(todosDiv, todo, projectManager, displayManager);
     })
 }

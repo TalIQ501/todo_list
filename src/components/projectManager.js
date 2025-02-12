@@ -40,21 +40,30 @@ export const projectManager = () => {
                 const changeTitle = (input) => title = input;
                 const changeDescription = (input) => description = input;
                 const changeDueDate = (input) => dueDate = new Date(input);
-                const toggleComplete = () => !taskComplete;
+                const toggleComplete = () => completed = !completed;
 
                 return { getTodoID, getTitle, changeTitle, getDescription, getComplete, changeDescription, getDueDate, changeDueDate, toggleComplete };
             }
 
             const getTodos = () => todos;
 
+            const findTodoByID = id => todos.find(todo => todo.getTodoID() === id);
+
             const addTodo = (todo) => {
                 todos.push(todo);
                 nextTodoID();
             };
+
+            const updateTodo = (newTodo) => {
+                const id = newTodo.getTodoID();
+                todos.splice(todos.indexOf(findTodoByID(id)), 1, newTodo);
+                console.log('Updated');
+                console.log(newTodo.getComplete());
+            }
             
             const removeTodo = (todo) => todos = todos.filter(!todo);
 
-            return { getCurrentTodoID, nextTodoID, createTodo, getTodos, addTodo, removeTodo };
+            return { getCurrentTodoID, nextTodoID, createTodo, findTodoByID, getTodos, addTodo, updateTodo, removeTodo };
         }
 
         const todoManager = todoManagerFunc();
