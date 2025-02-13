@@ -4,7 +4,7 @@ export const cycleProjects = (projectManager, displayManager) => {
     projectsDiv.innerHTML = '';
 
     projectManager.getProjects().forEach(project => {
-        displayManager.displayProjectSidebar(projectsDiv, project);
+        displayManager.displayProjectSidebar(projectsDiv, project, projectManager, displayManager);
     })
 }
 

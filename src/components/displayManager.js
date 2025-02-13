@@ -1,7 +1,7 @@
 import imgCheckMarkComplete from '../img/check-mark-green-svgrepo-com.svg';
 import imgCheckMarkIncomplete from '../img/check-mark-red-svgrepo-com.svg';
 
-import { checkMarkClickHandler } from "./clickHandlers";
+import { checkMarkClickHandler, projectClickHandler } from "./clickHandlers";
 
 
 export const displayManager = () => {
@@ -66,7 +66,7 @@ export const displayManager = () => {
         targetDiv.appendChild(todoDiv);
     }
 
-    const displayProjectSidebar = (targetDiv, project) => {
+    const displayProjectSidebar = (targetDiv, project, pm, dm) => {
         const projectName = project.getProjectName();
         const projectID = project.getID();
 
@@ -74,6 +74,8 @@ export const displayManager = () => {
         projectDiv.setAttribute('id', `project-${projectID}`);
         projectDiv.classList.add('project-sidebar');
         projectDiv.textContent = projectName;
+
+        projectDiv.addEventListener('click', () => projectClickHandler(projectID, pm, dm))
 
         targetDiv.appendChild(projectDiv);
     }

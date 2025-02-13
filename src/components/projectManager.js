@@ -74,7 +74,9 @@ export const projectManager = () => {
 
         const changeProjectName = (input) => project = input;
 
-        return { todoManager, getID, getProjectName, changeProjectName };
+        const findProjectByID = id => projects.find(project => project.getID() === id);
+
+        return { todoManager, getID, getProjectName, changeProjectName, findProjectByID };
     }
 
     const getProject = id => projects.find(project => project.getID() === id)
