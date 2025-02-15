@@ -1,12 +1,15 @@
 import imgCheckMarkComplete from '../img/check-mark-green-svgrepo-com.svg';
 import imgCheckMarkIncomplete from '../img/check-mark-red-svgrepo-com.svg';
 
-import { checkMarkClickHandler, projectClickHandler } from "./clickHandlers";
+import { checkMarkClickHandler, projectClickHandler, todoFormClickHandler } from "./clickHandlers";
 
 
 export const displayManager = () => {
 
     const displayTodo = (targetDiv, todo, pm, dm) => {
+        const dialog = document.getElementById('dialog-todo');
+
+        const id = todo.getTodoID();
         const title = todo.getTitle();
         const description = todo.getDescription();
         const dueDate = todo.getDueDate();
@@ -52,8 +55,6 @@ export const displayManager = () => {
         const detailsContainer = document.createElement('div');
         detailsContainer.classList.add('details-container');
 
-        completeDivContainer.addEventListener('click', () => checkMarkClickHandler(todo, pm, dm));
-
         detailsContainer.appendChild(titleDiv);
         detailsContainer.appendChild(descriptionDiv);
         detailsContainer.appendChild(dueDateDiv);
@@ -63,10 +64,15 @@ export const displayManager = () => {
 
         todoDiv.appendChild(flexRow);
 
+        detailsContainer.addEventListener('click', () => todoFormClickHandler(dialog, false, todo, pm))
+        completeDivContainer.addEventListener('click', () => checkMarkClickHandler(todo, pm, dm));
+
         targetDiv.appendChild(todoDiv);
     }
 
     const displayProjectSidebar = (targetDiv, project, pm, dm) => {
+        const dialog = document.getElementById('dialog-project');
+
         const projectName = project.getProjectName();
         const projectID = project.getID();
 

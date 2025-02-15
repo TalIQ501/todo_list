@@ -11,6 +11,8 @@
     </header>
     <dialog id="dialog-project" class="dialog-form">
         <form id="form-project" class="form-enter-data">
+            <input id="project-form-id" name="project-form-id" type="hidden">
+            <input id="project-form-type" name="project-form-type" class="form-status" type="hidden">
             <label for="input-project-name">Enter Project Name</label>
             <input id="input-project-name" type="text" name="input-project-name">
             <button id="project-submit" class="btn-primary" type="submit">Submit</button>
@@ -19,6 +21,8 @@
     </dialog>
     <dialog id="dialog-todo" class="dialog-form">
         <form id="form-todo" class="form-enter-data">
+            <input id="todo-form-id" name="todo-form-id" type="hidden">
+            <input id="todo-form-type" name="todo-form-type" type="hidden">
             <label for="input-todo-title">What task needs to be done?</label>
             <input id="input-todo-title" type="text" name="input-todo-title">
             <textarea id="input-todo-description" type="text" name="input-todo-description" placeholder="Describe your task"></textarea>

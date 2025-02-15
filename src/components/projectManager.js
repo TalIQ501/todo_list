@@ -47,7 +47,7 @@ export const projectManager = () => {
 
             const getTodos = () => todos;
 
-            const findTodoByID = id => todos.find(todo => todo.getTodoID() === id);
+            const findTodoByID = id => todos.find(todo => todo.getTodoID() === Number(id));
 
             const addTodo = (todo) => {
                 todos.push(todo);
@@ -57,8 +57,6 @@ export const projectManager = () => {
             const updateTodo = (newTodo) => {
                 const id = newTodo.getTodoID();
                 todos.splice(todos.indexOf(findTodoByID(id)), 1, newTodo);
-                console.log('Updated');
-                console.log(newTodo.getComplete());
             }
             
             const removeTodo = (todo) => todos = todos.filter(!todo);
@@ -74,19 +72,22 @@ export const projectManager = () => {
 
         const changeProjectName = (input) => project = input;
 
-        const findProjectByID = id => projects.find(project => project.getID() === id);
-
-        return { todoManager, getID, getProjectName, changeProjectName, findProjectByID };
+        return { todoManager, getID, getProjectName, changeProjectName };
     }
 
-    const getProject = id => projects.find(project => project.getID() === id)
+    const findProjectByID = id => projects.find(project => project.getID() === Number(id))
 
-    const getProjectFromName = (select) => projects.find(project => project.getProjectName() === select);
+    const findProjectByName = (select) => projects.find(project => project.getProjectName() === select);
+
+    const updateProject = (newProj) => {
+        const id = newProj.getID();
+        projects.splice(projects.indexOf(findProjectByID(id), 1, newProj));
+    }
 
     const getCurrentProject = () => currentProject;
 
     const changeCurrentProject = (targetID) => {
-        currentProject = getProject(targetID);
+        currentProject = findProjectByID(targetID);
     }
 
     const addProject = (project) => {
@@ -98,8 +99,9 @@ export const projectManager = () => {
         getProjects,
         getCurrentID,
         nextID,
-        getProject,
-        getProjectFromName,
+        findProjectByID,
+        findProjectByName,
+        updateProject,
         createProject,
         getCurrentProject,
         changeCurrentProject,
