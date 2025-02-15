@@ -56,7 +56,7 @@ const setDefaultValues = () => {
     defaultProj.changeProjectName('Todo App');
     
     const defaultTodo = defaultProj.todoManager.createTodo();
-    defaultTodo.changeTitle('Hello!');
+    defaultTodo.changeTitle('Welcome!');
     defaultTodo.changeDescription('Enter your todos here!');
     
     defaultProj.todoManager.addTodo(defaultTodo);

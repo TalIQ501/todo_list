@@ -29,6 +29,11 @@ img {
     flex-direction: row;
 }
 
+input, textarea, select  {
+    font-family: inherit;
+    border: 0.1px solid #ccc;
+}
+
 header {
     font-family: 'Quicksand';
     display: flex;
@@ -98,6 +103,15 @@ header {
 
 .dialog-form::backdrop {
     background: rgba(0, 0, 0, 0.5);
+}
+
+.form-enter-data input, textarea {
+    border-radius: 2px;
+}
+
+.form-enter-data textarea {
+    min-height: 200px;
+    min-width: 500px;
 }
 
 .form-enter-data .btn-primary {
