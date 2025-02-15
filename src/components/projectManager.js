@@ -59,8 +59,11 @@ export const projectManager = () => {
                 const index = todos.findIndex(todo => todo.getTodoID() === Number(id))
                 todos.splice(index, 1, newTodo);
             }
-            
-            const removeTodo = (todo) => todos = todos.filter(!todo);
+
+            const removeTodo = id => {
+                const index = todos.findIndex(todo => todo.getTodoID() === Number(id))
+                todos.splice(index, 1);
+            }
 
             return { getCurrentTodoID, nextTodoID, createTodo, findTodoByID, getTodos, addTodo, updateTodo, removeTodo };
         }
@@ -76,15 +79,16 @@ export const projectManager = () => {
         return { todoManager, getID, getProjectName, changeProjectName };
     }
 
+    const findProjectIndex = id => projects.findIndex(project => project.getID() === Number(id))
+
     const findProjectByID = id => projects.find(project => project.getID() === Number(id))
 
     const findProjectByName = (select) => projects.find(project => project.getProjectName() === select);
 
     const updateProject = (newProj) => {
         const id = newProj.getID();
-        const index = projects.findIndex(project => project.getID() === id);
+        const index = findProjectIndex(id)
         projects.splice(index, 1, newProj);
-
     }
 
     const getCurrentProject = () => currentProject;
@@ -93,9 +97,36 @@ export const projectManager = () => {
         currentProject = findProjectByID(targetID);
     }
 
+    const prevProject = currentID => {
+        const index = findProjectIndex(currentID);
+        let newID;
+        if (index <= 0) {
+            newID = projects[projects.length - 1].getID();
+        } else {
+            newID = projects[index - 1].getID();
+        }
+        changeCurrentProject(newID);
+    }
+
+    const nextProject = currentID => {
+        const index = findProjectIndex(currentID);
+        if (index >= projects.length) {
+            const newID = projects[0].getID();
+            changeCurrentProject(newID);
+        }
+        const newID = projects[index + 1].getID();
+        changeCurrentProject(newID);
+    }
+
     const addProject = (project) => {
         projects.push(project);
         nextID();
+    }
+
+    const removeProject = id => {
+        const index = findProjectIndex(id)
+
+        projects.splice(index, 1);
     }
 
     return {
@@ -108,6 +139,9 @@ export const projectManager = () => {
         createProject,
         getCurrentProject,
         changeCurrentProject,
-        addProject
+        prevProject,
+        nextProject,
+        addProject,
+        removeProject
     };
 }

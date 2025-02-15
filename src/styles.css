@@ -38,6 +38,16 @@ header {
     color: white;
 }
 
+.empty-todos {
+    color: red;
+    font-size: 1.5rem;
+}
+
+.empty-projects {
+    color: red;
+    font-size: 1.1rem;
+}
+
 .btn-primary,
 .btn-secondary {
     padding: 10px;

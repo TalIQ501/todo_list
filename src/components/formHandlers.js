@@ -11,8 +11,7 @@ export const formHandlerProject = (formData, projectManager) => {
     }
 
     const selectedProj = projectManager.findProjectByID(projectID);
-    selectedProj.changeProjectName(projName);
-    console.log(`Project ID is ${projectID}`)
+    selectedProj.changeProjectName(projName);   
     projectManager.updateProject(selectedProj);
     return
 }
@@ -24,9 +23,6 @@ export const formHandlerTodo = (formData, pm) => {
     const title = formData.get('input-todo-title');
     const description = formData.get('input-todo-description');
 
-    console.log(formData);
-    console.log(isNew)
-
     if (isNew === 'new') {
         const newTodo = project.todoManager.createTodo();
         newTodo.changeTitle(title);
@@ -35,7 +31,7 @@ export const formHandlerTodo = (formData, pm) => {
         return
     }
     
-    const selectedTodo = project.todoManager.findTodoByID(todoID);
+    const selectedTodo = project.todoManager.getTodo(findTodoByID(todoID));
     selectedTodo.changeDescription(description);
     project.todoManager.updateTodo(selectedTodo);
 

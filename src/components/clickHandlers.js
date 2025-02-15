@@ -1,4 +1,4 @@
-import { cycleTodos } from "./cycleLists.js";
+import { cycleProjects, cycleTodos } from "./cycleLists.js";
 
 export const projectClickHandler = (id, pm, dm) => {
     pm.changeCurrentProject(id);
@@ -23,7 +23,6 @@ export const projectFormClickHandler = (dialog, isNew, project) => {
 }
 
 export const todoFormClickHandler = (dialog, isNew, todo) => {
-    console.log(isNew)
     document.getElementById('todo-form-type').value = isNew;
     document.getElementById('todo-form-id').value = '';
 
@@ -33,7 +32,6 @@ export const todoFormClickHandler = (dialog, isNew, todo) => {
     }
 
     if (isNew !== 'new') {
-        console.log(`Click test passed with ${isNew}`)
         document.getElementById('input-todo-title').value = todo.getTitle();
         document.getElementById('input-todo-description').value = todo.getDescription();
         document.getElementById('todo-form-id').value = todo.getTodoID();
@@ -50,4 +48,36 @@ export const checkMarkClickHandler = (todo, pm, dm) => {
     project.todoManager.updateTodo(todo);
 
     cycleTodos(pm, dm);
+}
+
+export const deleteProject = (id, pm, dm) => {
+    const currentProject = pm.getCurrentProject();
+    const currentID = currentProject.getID();
+
+    pm.removeProject(id);
+
+    cycleProjects(pm, dm);
+
+    if (pm.getProjects().length === 0) {
+        dm.emptyProjects();
+        return
+    }
+
+    if (id === currentID) {
+        console.log('Same ID');
+        pm.prevProject();
+        cycleTodos(pm, dm)
+    }
+}
+
+export const deleteTodo = (id, pm, dm) => {
+    const currentProject = pm.getCurrentProject();
+
+    currentProject.todoManager.removeTodo(id);
+
+    cycleTodos(pm, dm);
+
+    if (currentProject.todoManager.getTodos().length === 0) {
+        dm.emptyTodos();
+    }
 }

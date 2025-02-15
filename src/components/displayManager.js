@@ -4,7 +4,7 @@ import imgCheckMarkIncomplete from '../img/check-mark-red-svgrepo-com.svg';
 import imgDelete from '../img/delete-material-icon.svg';
 import imgEdit from '../img/edit-material-icon.svg';
 
-import { checkMarkClickHandler, projectClickHandler, projectFormClickHandler, todoFormClickHandler } from "./clickHandlers";
+import { checkMarkClickHandler, deleteProject, deleteTodo, projectClickHandler, projectFormClickHandler, todoFormClickHandler } from "./clickHandlers";
 
 
 export const displayManager = () => {
@@ -83,6 +83,7 @@ export const displayManager = () => {
 
         detailsContainer.addEventListener('click', () => todoFormClickHandler(dialog, 'edit', todo, pm))
         btnCompleteContainer.addEventListener('click', () => checkMarkClickHandler(todo, pm, dm));
+        btnDeleteContainer.addEventListener('click', () => deleteTodo(id, pm, dm))
 
         targetDiv.appendChild(todoDiv);
     }
@@ -128,10 +129,30 @@ export const displayManager = () => {
 
         projectNameDiv.addEventListener('click', () => projectClickHandler(projectID, pm, dm));
         btnEditContainer.addEventListener('click', () => projectFormClickHandler(dialog, 'edit', project))
-        //btnDeleteContainer.addEventListener('click', () => )
+        btnDeleteContainer.addEventListener('click', () => deleteProject(projectID, pm, dm))
 
         targetDiv.appendChild(projectDiv);
     }
 
-    return { displayTodo, displayProjectSidebar }
+    const emptyTodos = () => {
+        const todosDiv = document.getElementById('todos');
+
+        const emptyDiv = document.createElement('p');
+        emptyDiv.classList.add('empty-todos');
+        emptyDiv.textContent = 'No tasks remaining in project! Add one using the "Add Todo Button"!';
+
+        todosDiv.appendChild(emptyDiv);
+    }
+
+    const emptyProjects = () => {
+        const projectsDiv = document.getElementById('project-list');
+
+        const emptyDiv = document.createElement('p');
+        emptyDiv.classList.add('empty-projects');
+        emptyDiv.textContent = 'No projects! Add one using the "Add Project Button"!';
+
+        projectsDiv.appendChild(emptyDiv);
+    }
+
+    return { displayTodo, displayProjectSidebar, emptyTodos, emptyProjects }
 }
