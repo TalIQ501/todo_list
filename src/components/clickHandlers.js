@@ -26,15 +26,25 @@ export const todoFormClickHandler = (dialog, isNew, todo) => {
     document.getElementById('todo-form-type').value = isNew;
     document.getElementById('todo-form-id').value = '';
 
+    const dueDateString = (dueDate) => {
+        const year = dueDate.getFullYear();
+        const month = String(dueDate.getMonth() + 1).padStart(2, '0');
+        const day = String(dueDate.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
     if (isNew === 'new') {
         document.getElementById('input-todo-title').value = '';
         document.getElementById('input-todo-description').value = '';
+        const newDate = new Date();
+        document.getElementById('input-todo-date').value = dueDateString(newDate);
     }
 
     if (isNew !== 'new') {
         document.getElementById('input-todo-title').value = todo.getTitle();
         document.getElementById('input-todo-description').value = todo.getDescription();
         document.getElementById('todo-form-id').value = todo.getTodoID();
+        document.getElementById('input-todo-date').value = dueDateString(todo.getDueDate());
     }
     
     dialog.showModal();

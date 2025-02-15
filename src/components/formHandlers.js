@@ -22,17 +22,22 @@ export const formHandlerTodo = (formData, pm) => {
     const isNew = formData.get('todo-form-type');
     const title = formData.get('input-todo-title');
     const description = formData.get('input-todo-description');
+    const date = formData.get('input-todo-date');
 
     if (isNew === 'new') {
         const newTodo = project.todoManager.createTodo();
         newTodo.changeTitle(title);
         newTodo.changeDescription(description);
+        newTodo.changeDueDate(date);
         project.todoManager.addTodo(newTodo);
         return
     }
     
-    const selectedTodo = project.todoManager.getTodo(findTodoByID(todoID));
+    const selectedTodo = project.todoManager.findTodoByID(todoID);
+    selectedTodo.changeTitle(title);
     selectedTodo.changeDescription(description);
+    selectedTodo.changeDueDate(date);
+
     project.todoManager.updateTodo(selectedTodo);
 
     return;
