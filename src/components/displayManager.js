@@ -1,6 +1,9 @@
 import imgCheckMarkComplete from '../img/check-mark-green-svgrepo-com.svg';
 import imgCheckMarkIncomplete from '../img/check-mark-red-svgrepo-com.svg';
 
+import imgDelete from '../img/delete-material-icon.svg';
+import imgEdit from '../img/edit-material-icon.svg';
+
 import { checkMarkClickHandler, projectClickHandler, todoFormClickHandler } from "./clickHandlers";
 
 
@@ -76,12 +79,42 @@ export const displayManager = () => {
         const projectName = project.getProjectName();
         const projectID = project.getID();
 
-        const projectDiv = document.createElement('p');
+        const projectDiv = document.createElement('div');
         projectDiv.setAttribute('id', `project-${projectID}`);
         projectDiv.classList.add('project-sidebar');
-        projectDiv.textContent = projectName;
 
-        projectDiv.addEventListener('click', () => projectClickHandler(projectID, pm, dm))
+        const projectNameDiv = document.createElement('p');
+        projectNameDiv.classList.add('project-name');
+        projectNameDiv.textContent = projectName;
+
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.classList.add('project-btn-container');
+
+        const btnDeleteContainer = document.createElement('div');
+        btnDeleteContainer.classList.add('img-container', 'btn-icon');
+
+        const btnDeleteImg = document.createElement('img');
+        btnDeleteImg.src = imgDelete;
+
+        btnDeleteContainer.appendChild(btnDeleteImg)
+
+        const btnEditContainer = document.createElement('div');
+        btnEditContainer.classList.add('img-container', 'btn-icon');
+
+        const btnEditImg = document.createElement('img');
+        btnEditImg.src = imgEdit;
+
+        btnEditContainer.appendChild(btnEditImg);
+
+        buttonsDiv.appendChild(btnEditContainer);
+        buttonsDiv.appendChild(btnDeleteContainer);
+
+        projectDiv.appendChild(projectNameDiv);
+        projectDiv.appendChild(buttonsDiv);
+
+        projectNameDiv.addEventListener('click', () => projectClickHandler(projectID, pm, dm))
+        //btnEditContainer.addEventListener('click', () => )
+        //btnDeleteContainer.addEventListener('click', () => )
 
         targetDiv.appendChild(projectDiv);
     }
