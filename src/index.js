@@ -14,7 +14,7 @@ const dialogProject = document.getElementById('dialog-project');
 const dialogTodo = document.getElementById('dialog-todo');
 
 const btnAddProject = document.getElementById('btn-add-project');
-btnAddProject.addEventListener('click', () => projectFormClickHandler(dialogProject, true));
+btnAddProject.addEventListener('click', () => projectFormClickHandler(dialogProject, 'new'));
 
 const btnCloseProject = document.getElementById('dialog-project-close');
 btnCloseProject.addEventListener('click', () => dialogProject.close());
@@ -63,7 +63,7 @@ const setDefaultValues = () => {
     
     pm.addProject(defaultProj);
     pm.changeCurrentProject(defaultProj.getID());
-}    
+}
 
 const display = () => {
     cycleProjects(pm, dm); 

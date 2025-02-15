@@ -1,9 +1,9 @@
 export const formHandlerProject = (formData, projectManager) => {
-    const projectID = formData.get('project-form-id')
+    const projectID = formData.get('project-form-id');
     const isNew = formData.get('project-form-type');
     const projName = formData.get('input-project-name');
 
-    if (isNew) {
+    if (isNew === 'new') {
         const newProj = projectManager.createProject();
         newProj.changeProjectName(projName);
         projectManager.addProject(newProj);
@@ -12,6 +12,7 @@ export const formHandlerProject = (formData, projectManager) => {
 
     const selectedProj = projectManager.findProjectByID(projectID);
     selectedProj.changeProjectName(projName);
+    console.log(`Project ID is ${projectID}`)
     projectManager.updateProject(selectedProj);
     return
 }

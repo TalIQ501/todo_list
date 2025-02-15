@@ -5,6 +5,7 @@ export const cycleProjects = (projectManager, displayManager) => {
 
     projectManager.getProjects().forEach(project => {
         displayManager.displayProjectSidebar(projectsDiv, project, projectManager, displayManager);
+        console.log(`Project Displayed is ${project.getProjectName()}`)
     })
 }
 

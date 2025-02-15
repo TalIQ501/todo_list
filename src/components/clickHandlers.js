@@ -6,9 +6,18 @@ export const projectClickHandler = (id, pm, dm) => {
     cycleTodos(pm, dm);
 }
 
-export const projectFormClickHandler = (dialog, isNew=false, projectManager=null) => {
+export const projectFormClickHandler = (dialog, isNew, project) => {
     document.getElementById('project-form-type').value = isNew;
     document.getElementById('project-form-id').value = '';
+
+    if (isNew === 'new') {
+        document.getElementById('input-project-name').value = '';
+    }
+
+    if (!(isNew === 'new')) {
+        document.getElementById('project-form-id').value = project.getID();
+        document.getElementById('input-project-name').value = project.getProjectName();
+    }
 
     dialog.showModal();
 }
@@ -19,7 +28,6 @@ export const todoFormClickHandler = (dialog, isNew, todo) => {
     document.getElementById('todo-form-id').value = '';
 
     if (isNew === 'new') {
-        `Click test passed with ${isNew}`
         document.getElementById('input-todo-title').value = '';
         document.getElementById('input-todo-description').value = '';
     }

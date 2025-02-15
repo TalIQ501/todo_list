@@ -4,7 +4,7 @@ import imgCheckMarkIncomplete from '../img/check-mark-red-svgrepo-com.svg';
 import imgDelete from '../img/delete-material-icon.svg';
 import imgEdit from '../img/edit-material-icon.svg';
 
-import { checkMarkClickHandler, projectClickHandler, todoFormClickHandler } from "./clickHandlers";
+import { checkMarkClickHandler, projectClickHandler, projectFormClickHandler, todoFormClickHandler } from "./clickHandlers";
 
 
 export const displayManager = () => {
@@ -40,8 +40,11 @@ export const displayManager = () => {
         dueDateDiv.classList.add('due-date');
         dueDateDiv.textContent = dueDateString();
 
-        const completeDivContainer = document.createElement('div');
-        completeDivContainer.classList.add('img-container', 'check-mark-container');
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.classList.add('todo-btn-container');
+
+        const btnCompleteContainer = document.createElement('div');
+        btnCompleteContainer.classList.add('img-container', 'btn-icon');
         
         const checkMark = document.createElement('img');
 
@@ -50,7 +53,18 @@ export const displayManager = () => {
             checkMark.src = imgCheckMarkIncomplete
         })()
 
-        completeDivContainer.appendChild(checkMark);
+        btnCompleteContainer.appendChild(checkMark);
+
+        const btnDeleteContainer = document.createElement('div');
+        btnDeleteContainer.classList.add('img-container', 'btn-icon');
+
+        const btnDeleteImg = document.createElement('img');
+        btnDeleteImg.src = imgDelete;
+
+        btnDeleteContainer.appendChild(btnDeleteImg);
+
+        buttonsContainer.appendChild(btnCompleteContainer);
+        buttonsContainer.appendChild(btnDeleteContainer);
 
         const flexRow = document.createElement('div');
         flexRow.classList.add('flex-row-container');
@@ -62,13 +76,13 @@ export const displayManager = () => {
         detailsContainer.appendChild(descriptionDiv);
         detailsContainer.appendChild(dueDateDiv);
 
-        flexRow.appendChild(completeDivContainer);
+        flexRow.appendChild(buttonsContainer);
         flexRow.appendChild(detailsContainer);
 
         todoDiv.appendChild(flexRow);
 
-        detailsContainer.addEventListener('click', () => todoFormClickHandler(dialog, false, todo, pm))
-        completeDivContainer.addEventListener('click', () => checkMarkClickHandler(todo, pm, dm));
+        detailsContainer.addEventListener('click', () => todoFormClickHandler(dialog, 'edit', todo, pm))
+        btnCompleteContainer.addEventListener('click', () => checkMarkClickHandler(todo, pm, dm));
 
         targetDiv.appendChild(todoDiv);
     }
@@ -112,8 +126,8 @@ export const displayManager = () => {
         projectDiv.appendChild(projectNameDiv);
         projectDiv.appendChild(buttonsDiv);
 
-        projectNameDiv.addEventListener('click', () => projectClickHandler(projectID, pm, dm))
-        //btnEditContainer.addEventListener('click', () => )
+        projectNameDiv.addEventListener('click', () => projectClickHandler(projectID, pm, dm));
+        btnEditContainer.addEventListener('click', () => projectFormClickHandler(dialog, 'edit', project))
         //btnDeleteContainer.addEventListener('click', () => )
 
         targetDiv.appendChild(projectDiv);

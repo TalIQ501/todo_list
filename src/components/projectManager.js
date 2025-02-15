@@ -56,7 +56,8 @@ export const projectManager = () => {
 
             const updateTodo = (newTodo) => {
                 const id = newTodo.getTodoID();
-                todos.splice(todos.indexOf(findTodoByID(id)), 1, newTodo);
+                const index = todos.findIndex(todo => todo.getTodoID() === Number(id))
+                todos.splice(index, 1, newTodo);
             }
             
             const removeTodo = (todo) => todos = todos.filter(!todo);
@@ -81,7 +82,9 @@ export const projectManager = () => {
 
     const updateProject = (newProj) => {
         const id = newProj.getID();
-        projects.splice(projects.indexOf(findProjectByID(id), 1, newProj));
+        const index = projects.findIndex(project => project.getID() === id);
+        projects.splice(index, 1, newProj);
+
     }
 
     const getCurrentProject = () => currentProject;
