@@ -4,9 +4,9 @@ import { cycleProjects } from './components/cycleLists';
 import { cycleTodos } from './components/cycleLists';
 import { formHandlerProject, formHandlerTodo } from './components/formHandlers';
 import { projectFormClickHandler, todoFormClickHandler } from './components/clickHandlers';
+import { loadProjectManager, saveProjectManager } from './components/localStorageHandler';
 
 import './styles.css';
-import { loadProjectManager } from './components/localStorageHandler';
 
 const pm = projectManager();
 const dm = displayManager();
@@ -64,6 +64,7 @@ const setDefaultValues = () => {
     
     pm.addProject(defaultProj);
     pm.changeCurrentProject(defaultProj.getID());
+    saveProjectManager(pm);
 }
 
 const display = () => {

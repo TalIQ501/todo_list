@@ -1,4 +1,5 @@
 import { cycleProjects, cycleTodos } from "./cycleLists.js";
+import { saveProjectManager } from "./localStorageHandler.js";
 
 export const projectClickHandler = (id, pm, dm) => {
     pm.changeCurrentProject(id);
@@ -57,6 +58,8 @@ export const checkMarkClickHandler = (todo, pm, dm) => {
 
     project.todoManager.updateTodo(todo);
 
+    saveProjectManager(pm)
+
     cycleTodos(pm, dm);
 }
 
@@ -72,14 +75,16 @@ export const deleteProject = (id, pm, dm) => {
         dm.emptyProjects();
         pm.changeCurrentProject(null);
         cycleTodos(pm, dm)
+        saveProjectManager(pm)
         return
     }
 
     if (id === currentID) {
-        console.log('Same ID');
         pm.prevProject();
         cycleTodos(pm, dm);
     }
+
+    saveProjectManager(pm)
 }
 
 export const deleteTodo = (id, pm, dm) => {
@@ -89,7 +94,5 @@ export const deleteTodo = (id, pm, dm) => {
 
     cycleTodos(pm, dm);
 
-    if (currentProject.todoManager.getTodos().length === 0) {
-        dm.emptyTodos();
-    }
+    saveProjectManager(pm)
 }

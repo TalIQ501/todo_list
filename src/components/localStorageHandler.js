@@ -27,12 +27,13 @@ export const loadProjectManager = (pm) => {
             const todo = project.todoManager.createTodo();
             todo.changeTitle(todoData.title);
             todo.changeDescription(todoData.description);
-            todo.changeDueDate(todoData.date);
+            todo.changeDueDate(todoData.dueDate);
             if (todoData.completed) todo.toggleComplete();
             project.todoManager.addTodo(todo);
         })
         pm.addProject(project);
     })
 
+    pm.changeCurrentProject(data.currentProjectID);
     return true
 }

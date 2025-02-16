@@ -1,3 +1,5 @@
+import { saveProjectManager } from "./localStorageHandler";
+
 export const formHandlerProject = (formData, projectManager) => {
     const projectID = formData.get('project-form-id');
     const isNew = formData.get('project-form-type');
@@ -10,17 +12,19 @@ export const formHandlerProject = (formData, projectManager) => {
         if (projectManager.getCurrentProject() === undefined || projectManager.getCurrentProject() === null) {
             projectManager.changeCurrentProject(newProj.getID())
         }
+        saveProjectManager(projectManager);
         return
     }
 
     const selectedProj = projectManager.findProjectByID(projectID);
     selectedProj.changeProjectName(projName);   
     projectManager.updateProject(selectedProj);
+    saveProjectManager(pm);
     return
 }
 
-export const formHandlerTodo = (formData, pm) => {
-    const project = pm.getCurrentProject() ? pm.getCurrentProject() : null;
+export const formHandlerTodo = (formData, projectManager) => {
+    const project = projectManager.getCurrentProject() ? projectManager.getCurrentProject() : null;
     const todoID = formData.get('todo-form-id');
     const isNew = formData.get('todo-form-type');
     const title = formData.get('input-todo-title');
@@ -33,6 +37,7 @@ export const formHandlerTodo = (formData, pm) => {
         newTodo.changeDescription(description);
         newTodo.changeDueDate(date);
         project.todoManager.addTodo(newTodo);
+        saveProjectManager(projectManager);
         return
     }
     
@@ -42,6 +47,7 @@ export const formHandlerTodo = (formData, pm) => {
     selectedTodo.changeDueDate(date);
 
     project.todoManager.updateTodo(selectedTodo);
+    saveProjectManager(projectManager);
 
     return;
 }

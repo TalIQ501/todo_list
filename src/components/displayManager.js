@@ -81,6 +81,8 @@ export const displayManager = () => {
 
         todoDiv.appendChild(flexRow);
 
+        todoDiv.setAttribute('id', `todo-${id}`)
+
         detailsContainer.addEventListener('click', () => todoFormClickHandler(dialog, 'edit', todo, pm))
         btnCompleteContainer.addEventListener('click', () => checkMarkClickHandler(todo, pm, dm));
         btnDeleteContainer.addEventListener('click', () => deleteTodo(id, pm, dm))
