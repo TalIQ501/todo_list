@@ -11,10 +11,12 @@ export const projectFormClickHandler = (dialog, isNew, project) => {
     document.getElementById('project-form-type').value = isNew;
     document.getElementById('project-form-id').value = '';
 
+    //Setingg default value for new form
     if (isNew === 'new') {
         document.getElementById('input-project-name').value = '';
     }
 
+    //Passinggg existing data to form
     if (!(isNew === 'new')) {
         document.getElementById('project-form-id').value = project.getID();
         document.getElementById('input-project-name').value = project.getProjectName();
@@ -27,6 +29,7 @@ export const todoFormClickHandler = (dialog, isNew, todo) => {
     document.getElementById('todo-form-type').value = isNew;
     document.getElementById('todo-form-id').value = '';
 
+    //Parsing to string
     const dueDateString = (dueDate) => {
         const year = dueDate.getFullYear();
         const month = String(dueDate.getMonth() + 1).padStart(2, '0');
@@ -71,6 +74,7 @@ export const deleteProject = (id, pm, dm) => {
 
     cycleProjects(pm, dm);
 
+    //Checking if no projects exist
     if (pm.getProjects().length === 0) {
         dm.emptyProjects();
         pm.changeCurrentProject(null);
@@ -79,6 +83,7 @@ export const deleteProject = (id, pm, dm) => {
         return
     }
 
+    //Returning to previous project if current project is deleted
     if (id === currentID) {
         pm.prevProject();
         cycleTodos(pm, dm);
