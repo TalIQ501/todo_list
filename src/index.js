@@ -6,6 +6,7 @@ import { formHandlerProject, formHandlerTodo } from './components/formHandlers';
 import { projectFormClickHandler, todoFormClickHandler } from './components/clickHandlers';
 
 import './styles.css';
+import { loadProjectManager } from './components/localStorageHandler';
 
 const pm = projectManager();
 const dm = displayManager();
@@ -70,5 +71,10 @@ const display = () => {
     cycleTodos(pm, dm);
 }
 
-setDefaultValues()
+const loaded = loadProjectManager(pm);
+
+if (!loaded) {
+    setDefaultValues();
+}
+
 display()

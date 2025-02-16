@@ -10,11 +10,17 @@ export const cycleProjects = (projectManager, displayManager) => {
 
 export const cycleTodos = (projectManager, displayManager) => {
     const todosDiv = document.getElementById('todos');
-    const project = projectManager.getCurrentProject();
+    const project = projectManager.getCurrentProject() ? projectManager.getCurrentProject() : null;
+    const todos = project ? project.todoManager.getTodos() : null
 
     todosDiv.innerHTML = '';
 
-    project.todoManager.getTodos().forEach(todo => {
+    if (!project || todos.length === 0) {
+        displayManager.emptyTodos();
+        return
+    }
+
+    todos.forEach(todo => {
         displayManager.displayTodo(todosDiv, todo, projectManager, displayManager);
     })
 }

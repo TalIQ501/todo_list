@@ -70,6 +70,8 @@ export const deleteProject = (id, pm, dm) => {
 
     if (pm.getProjects().length === 0) {
         dm.emptyProjects();
+        pm.changeCurrentProject(null);
+        cycleTodos(pm, dm)
         return
     }
 

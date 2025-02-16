@@ -107,7 +107,7 @@ export const projectManager = () => {
 
         const JSONify = () => ({
             id,
-            project: getProjectName(),
+            project,
             todos: todoManager.getTodos().map(todo => todo.JSONify())
         })
 
@@ -129,6 +129,7 @@ export const projectManager = () => {
     const getCurrentProject = () => currentProject;
 
     const changeCurrentProject = (targetID) => {
+        if (targetID === null) currentProject = null
         currentProject = findProjectByID(targetID);
     }
 

@@ -7,6 +7,9 @@ export const formHandlerProject = (formData, projectManager) => {
         const newProj = projectManager.createProject();
         newProj.changeProjectName(projName);
         projectManager.addProject(newProj);
+        if (projectManager.getCurrentProject() === undefined || projectManager.getCurrentProject() === null) {
+            projectManager.changeCurrentProject(newProj.getID())
+        }
         return
     }
 
@@ -17,7 +20,7 @@ export const formHandlerProject = (formData, projectManager) => {
 }
 
 export const formHandlerTodo = (formData, pm) => {
-    const project = pm.getCurrentProject();
+    const project = pm.getCurrentProject() ? pm.getCurrentProject() : null;
     const todoID = formData.get('todo-form-id');
     const isNew = formData.get('todo-form-type');
     const title = formData.get('input-todo-title');
