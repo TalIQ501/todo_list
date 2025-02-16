@@ -1,17 +1,17 @@
 export const projectManager = () => {
 
-    let projectID = 0;
+    let latestProjectID = 0;
 
     const projects = [];
 
     let currentProject = null;
     const getProjects = () => projects;
-    const getCurrentID = () => projectID;
+    const getLatestID = () => latestProjectID;
 
-    const nextID = () => projectID = projectID + 1;
+    const nextID = () => latestProjectID = latestProjectID + 1;
 
     const createProject = () => {
-        const id = getCurrentID();
+        const id = getLatestID();
 
         let project = '';
 
@@ -42,7 +42,27 @@ export const projectManager = () => {
                 const changeDueDate = (input) => dueDate = new Date(input);
                 const toggleComplete = () => completed = !completed;
 
-                return { getTodoID, getTitle, changeTitle, getDescription, getComplete, changeDescription, getDueDate, changeDueDate, toggleComplete };
+                //Convert to JSON for localStorage
+                const JSONify = () => ({
+                    id,
+                    title,
+                    description,
+                    dueDate: dueDate.toISOString(),
+                    completed
+                })
+
+                return { 
+                    getTodoID,
+                    getTitle,
+                    changeTitle,
+                    getDescription,
+                    getComplete,
+                    changeDescription,
+                    getDueDate,
+                    changeDueDate,
+                    toggleComplete,
+                    JSONify
+                };
             }
 
             const getTodos = () => todos;
@@ -65,7 +85,16 @@ export const projectManager = () => {
                 todos.splice(index, 1);
             }
 
-            return { getCurrentTodoID, nextTodoID, createTodo, findTodoByID, getTodos, addTodo, updateTodo, removeTodo };
+            return { 
+                getCurrentTodoID,
+                nextTodoID,
+                createTodo,
+                findTodoByID,
+                getTodos,
+                addTodo,
+                updateTodo,
+                removeTodo
+            };
         }
 
         const todoManager = todoManagerFunc();
@@ -76,7 +105,13 @@ export const projectManager = () => {
 
         const changeProjectName = (input) => project = input;
 
-        return { todoManager, getID, getProjectName, changeProjectName };
+        const JSONify = () => ({
+            id,
+            project: getProjectName(),
+            todos: todoManager.getTodos().map(todo => todo.JSONify())
+        })
+
+        return { todoManager, getID, getProjectName, changeProjectName, JSONify };
     }
 
     const findProjectIndex = id => projects.findIndex(project => project.getID() === Number(id))
@@ -131,7 +166,7 @@ export const projectManager = () => {
 
     return {
         getProjects,
-        getCurrentID,
+        getLatestID,
         nextID,
         findProjectByID,
         findProjectByName,

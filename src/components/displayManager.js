@@ -139,7 +139,7 @@ export const displayManager = () => {
 
         const emptyDiv = document.createElement('p');
         emptyDiv.classList.add('empty-todos');
-        emptyDiv.textContent = 'No tasks remaining in project! Add one using the "Add Todo Button"!';
+        emptyDiv.textContent = 'No tasks remaining in project! Add one using the "New Todo" Button!';
 
         todosDiv.appendChild(emptyDiv);
     }
@@ -149,7 +149,7 @@ export const displayManager = () => {
 
         const emptyDiv = document.createElement('p');
         emptyDiv.classList.add('empty-projects');
-        emptyDiv.textContent = 'No projects! Add one using the "Add Project Button"!';
+        emptyDiv.textContent = 'No projects! Add one using the "New Project" Button!';
 
         projectsDiv.appendChild(emptyDiv);
     }

@@ -76,7 +76,7 @@ export const deleteProject = (id, pm, dm) => {
     if (id === currentID) {
         console.log('Same ID');
         pm.prevProject();
-        cycleTodos(pm, dm)
+        cycleTodos(pm, dm);
     }
 }
 
